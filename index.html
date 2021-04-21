@@ -67,6 +67,8 @@
             </div>
           </div>
         </div>
+
+        <!-- TEXT INPUT BILL -->
         <div class="six columns box">
           <h3>Text input bill</h3>
 
@@ -111,6 +113,8 @@
         </div>
 
       </div>
+
+      <!-- RADIO BUTTON BILL -->
       <div class="row">
         <div class="six columns box">
           <h3>Radio button bill</h3>
@@ -136,15 +140,19 @@
           <div class="row">
             <div class="six columns">
               <h5>Bill type</h5>
+
               <label class="">
                 <input type="radio" name="billItemType" class="billItemTypeRadio" value="call">
                 <span class="label-body">Call</span>
               </label>
+
               <label class="">
                 <input type="radio" name="billItemType" class="billItemTypeRadio" value="sms">
                 <span class="label-body" >SMS</span>
               </label>
+
               <button class="button-primary radioBillAddBtn" type="button" name="button">Add</button>
+
             </div>
             <div class="six columns">
                   <h5>Totals</h5>
@@ -165,6 +173,8 @@
             </div>
           </div>
         </div>
+
+        <!-- BILL WITH SETTINGS -->
         <div class="six columns box">
           <h3>Bill with settings</h3>
           <div class="">
@@ -185,15 +195,18 @@
 
             <div class="six columns">
               <h5>Bill type</h5>
+
               <label class="">
-                <input type="radio" name="billItemTypeWithSettings" class="billItemTypeWithSettings">
+                <input type="radio" name="billItemTypeWithSettings" class="billItemTypeWithSettings" value="">
                 <span class="label-body">Call</span>
               </label>
+
               <label class="">
-                <input type="radio" name="billItemTypeWithSettings" class="billItemTypeWithSettings">
+                <input type="radio" name="billItemTypeWithSettings" class="billItemTypeWithSettings" value="">
                 <span class="label-body" >SMS</span>
               </label>
-              <button class="button-primary" type="button" name="button">Add</button>
+
+              <button class="button-primary addButton" type="button" name="button">Add</button>
 
               <h5>Totals</h5>
                   <table>
@@ -214,14 +227,19 @@
             </div>
             <div class="six columns">
               <h5>Settings</h5>
+
               <label for="exampleEmailInput">Call cost</label>
-              <input class="u-full-width callCostSetting" type="number" placeholder="eg. 2.55">
+              <input class="u-full-width callCostSetting" type="number" placeholder="eg. 2.55" value="">
+
               <label for="exampleEmailInput">SMS cost</label>
-              <input class="u-full-width smsCostSetting" type="number" placeholder="eg. 0.65" >
+              <input class="u-full-width smsCostSetting" type="number" placeholder="eg. 0.65" value="">
+
               <label for="">Warning level</label>
               <input class="u-full-width warningLevelSetting " type="number" placeholder="eg. 30.00" class="warningLevel" >
+
               <label for="">Critical level</label>
               <input class="u-full-width criticalLevelSetting" type="number" placeholder="eg. 65.00" >
+
               <button class="button-primary updateSettings" type="button" name="button">Update settings</button>
 
             </div>
