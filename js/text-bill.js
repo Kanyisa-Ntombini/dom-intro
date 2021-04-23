@@ -1,5 +1,5 @@
 // get a reference to the textbox where the bill type is to be entered
-const billTypeText = document.querySelector(".billTypeText");
+const billTypeInput = document.querySelector(".billTypeText");
 
 //get a reference to the add button
 const addToBillBtn = document.querySelector(".addToBillBtn");
@@ -14,10 +14,10 @@ var totalAmount = 0;
 // * add nothing for invalid values that is not 'call' or 'sms'.
 // * display the latest total on the screen
 function textBill () {
-    if (billTypeText.value === "sms") {
+    if (billTypeInput.value === "sms") {
         totalSms += 0.75;
         totalAmount += 0.75;
-    } else if (billTypeText.value === "call") {
+    } else if (billTypeInput.value === "call") {
         totalCall += 2.75;
         totalAmount += 2.75;
     }
