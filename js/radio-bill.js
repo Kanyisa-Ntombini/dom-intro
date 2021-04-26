@@ -33,9 +33,9 @@ function calcRadioBill() {
 
     totalOutput.classList.remove("warning");
     totalOutput.classList.remove("danger");
-    if (totalRadio>30 && totalRadio<=50) {
+    if (totalRadio>=30 && totalRadio<50) {
         totalOutput.classList.add("warning");
-    } else if (totalRadio>50) {
+    } else if (totalRadio>=50) {
         totalOutput.classList.add("danger");
     }
 }

@@ -41,9 +41,9 @@ function totalPhoneBill () {
     //Displaying the total bill
     billTotal.classList.remove("warning");
     billTotal.classList.remove("danger");
-    if (roundedCost>20.00 && roundedCost<=30.00) {
+    if (roundedCost>=20.00 && roundedCost<30.00) {
         billTotal.classList.add("warning");
-    } else if (roundedCost > 30.00) {
+    } else if (roundedCost >= 30.00) {
         billTotal.classList.add("danger");
     }
 }

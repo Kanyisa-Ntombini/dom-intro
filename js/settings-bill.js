@@ -42,9 +42,9 @@ function updateSet() {
     totalSetOutput.classList.remove("warning");
     totalSetOutput.classList.remove("danger");
 
-    if (totalSet > warningPrice && totalSet <= dangerPrice) {
+    if (totalSet >= warningPrice && totalSet < dangerPrice) {
         totalSetOutput.classList.add("warning");
-    } else if (totalSet > dangerPrice) {
+    } else if (totalSet >= dangerPrice) {
         totalSetOutput.classList.add("danger");
     }
 }
@@ -53,7 +53,7 @@ function settingsCalc () {
     // get a reference to the sms or call radio buttons
     const radioBtn = document.querySelector(".billItemTypeWithSettings:checked");
 
-    if (totalSet <= dangerPrice) {
+    if (totalSet < dangerPrice) {
         if (radioBtn.value === 'sms') {
             smsTotalSet += smsPrice;
             totalSet += smsPrice;
@@ -74,9 +74,9 @@ function settingsCalc () {
 
     totalSetOutput.classList.remove("warning");
     totalSetOutput.classList.remove("danger");
-    if (totalSet > warningPrice && totalSet <= dangerPrice) {
+    if (totalSet >= warningPrice && totalSet < dangerPrice) {
         totalSetOutput.classList.add("warning");
-    } else if (totalSet > dangerPrice) {
+    } else if (totalSet >= dangerPrice) {
         totalSetOutput.classList.add("danger");
     }
 }
