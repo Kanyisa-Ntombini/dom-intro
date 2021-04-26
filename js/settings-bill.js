@@ -34,14 +34,14 @@ function updateSet() {
     warningPrice = 0;
     dangerPrice = 0;
 
-    callPrice = parseInt(callAmountInput.value);
-    smsPrice = parseInt(smsAmountInput.value);
-    warningPrice = parseInt(warningAmountInput.value);
-    dangerPrice = parseInt(dangerAmountInput.value);
+    callPrice = parseFloat(callAmountInput.value);
+    smsPrice = parseFloat(smsAmountInput.value);
+    warningPrice = parseFloat(warningAmountInput.value);
+    dangerPrice = parseFloat(dangerAmountInput.value);
 
-    smsTotalSet = 0;
+    /*smsTotalSet = 0;
     callTotalSet = 0;
-    totalSet = 0;
+    totalSet = 0;*/
 
     totalSetOutput.classList.remove("warning");
     totalSetOutput.classList.remove("danger");
