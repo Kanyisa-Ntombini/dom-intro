@@ -29,30 +29,24 @@ var totalSetOutput = document.querySelector(".totalSettings");
 
 /* === FUNCTIONS === */
 function updateSet() {
-    callPrice = 0;
-    smsPrice = 0;
-    warningPrice = 0;
-    dangerPrice = 0;
+    callPrice = 0.00;
+    smsPrice = 0.00;
+    warningPrice = 0.00;
+    dangerPrice = 0.00;
 
     callPrice = parseFloat(callAmountInput.value);
     smsPrice = parseFloat(smsAmountInput.value);
     warningPrice = parseFloat(warningAmountInput.value);
     dangerPrice = parseFloat(dangerAmountInput.value);
 
-    /*smsTotalSet = 0;
-    callTotalSet = 0;
-    totalSet = 0;*/
-
     totalSetOutput.classList.remove("warning");
     totalSetOutput.classList.remove("danger");
-    callSetOutput.innerHTML = callTotalSet.toFixed(2);
-    smsSetOutput.innerHTML = smsTotalSet.toFixed(2);
-    totalSetOutput.innerHTML = totalSet.toFixed(2);
 
-    console.log(callPrice);
-    console.log(smsPrice);
-    console.log(warningPrice);
-    console.log(dangerPrice);
+    if (totalSet > warningPrice && totalSet <= dangerPrice) {
+        totalSetOutput.classList.add("warning");
+    } else if (totalSet > dangerPrice) {
+        totalSetOutput.classList.add("danger");
+    }
 }
 
 function settingsCalc () {
