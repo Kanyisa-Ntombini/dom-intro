@@ -9,6 +9,8 @@ const billString = document.querySelector(".billString");
 
 /* === FUNCTION FOR CALCULATING TOTAL PHONE BILL */
 function totalPhoneBill(phoneRecord) {
+	var answer = "";
+
 	if ((typeof phoneRecord) === 'string') {
 		var phoneRecordList = phoneRecord.split(',');
 		var cost = 0;
@@ -16,14 +18,18 @@ function totalPhoneBill(phoneRecord) {
 		for (var i = 0; i < phoneRecordList.length; i++) {
 			var item = phoneRecordList[i].trim();
 
-			if (item === 'call') {
-				cost += 2.75;
-			}
-			else if (item === 'sms') {
-				cost += 0.75;
-			}
-			else {
-				return "Please type call or sms";
+			switch (item) {
+				case 'call':
+					cost += 2.75;
+					break;
+				case 'sms':
+					cost += 0.75;
+					break;
+				case '':
+					cost += 0;
+					break;
+				default:
+					return "Please only type call or sms";
 			}
 		}
 

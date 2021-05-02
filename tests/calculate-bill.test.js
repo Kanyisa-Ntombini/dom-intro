@@ -6,11 +6,18 @@ describe('The totalPhoneBill function' ,
             }
         );
 
-        it ('should return "Please type call or sms" for "Mount Everest"' , 
+        it ('should return "Please only type call or sms" for "Mount Everest"' , 
             function () {
-                assert.deepEqual("Please type call or sms", totalPhoneBill("Mount Everest"));
+                assert.deepEqual("Please only type call or sms", totalPhoneBill("Mount Everest"));
             }
         );
+
+        it ('should return R0.00 for ""' , 
+            function () {
+                assert.deepEqual(0, totalPhoneBill(""));
+            }
+        );
+
 
         it ('should return R4.25 for "sms, call, sms"' , 
             function () {

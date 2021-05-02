@@ -13,31 +13,50 @@ var totalAmount = 0;
 // * add the appropriate value to the running total
 // * add nothing for invalid values that is not 'call' or 'sms'.
 // * display the latest total on the screen
-function textBill () {
-    if (billTypeInput.value === "sms") {
-        totalSms += 0.75;
-        totalAmount += 0.75;
-    } else if (billTypeInput.value === "call") {
-        totalCall += 2.75;
-        totalAmount += 2.75;
+var textBillFunc =  function (billTypeInput) {
+    switch (billTypeInput.value) {
+        case 'sms':
+            totalSms += 0.75;
+            totalAmount += 0.75;
+            break;
+        case 'call':
+            totalCall += 2.75;
+            totalAmount += 2.75;
+        case '':
+            totalCall += 0;
+            totalAmount += 0;
+        default:
+            return "Please enter call or sms";
     }
+
+    return {
+        sms: totalSms,
+        call: totalCall,
+        total: totalAmount
+    }
+};
+
+/* === EVENT LISTENER FUNCTION === */
+function textBillEvent () {
+    var text = billTypeInput.value;
+    var textBill = textBillFunc(text);
 
     let callTotalOne = document.querySelector(".callTotalOne");
     let smsTotalOne = document.querySelector(".smsTotalOne");
     let totalOne = document.querySelector(".totalOne");
 
-    callTotalOne.innerHTML = totalCall.toFixed(2);
-    smsTotalOne.innerHTML = totalSms.toFixed(2);
-    totalOne.innerHTML = totalAmount.toFixed(2);
+    callTotalOne.innerHTML = textBill.totalCall.toFixed(2);
+    smsTotalOne.innerHTML = textBill.totalSms.toFixed(2);
+    totalOne.innerHTML = textBill.totalAmount.toFixed(2);
 
     totalOne.classList.remove("warning");
     totalOne.classList.remove("danger");
-    if (totalAmount > 30 && totalAmount <= 50) {
+    if (textBill.totalAmount > 30 && textBill.totalAmount <= 50) {
         totalOne.classList.add("warning");
-    } else if (totalAmount > 50) {
+    } else if (textBill.totalAmount > 50) {
         totalOne.classList.add("danger");
     }
 }
 
 //add an event listener for when the add button is pressed
-addToBillBtn.addEventListener("click", textBill);
+addToBillBtn.addEventListener("click", textBillEvent);
