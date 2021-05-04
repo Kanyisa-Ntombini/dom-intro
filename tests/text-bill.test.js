@@ -13,7 +13,7 @@ describe('The textBill function' ,
             }
         );
 
-        it ('should calculate call cost for two calls', 
+        it ('should calculate call cost for two calls at R2.75 each', 
             function () {
                 let textBill = TextBillFunc();
                 textBill.makeCall();
@@ -25,7 +25,7 @@ describe('The textBill function' ,
             }
         );
 
-        it ('should calculate sms cost for four smses', 
+        it ('should calculate sms cost for four smses at R0.75 each', 
             function () {
                 let textBill = TextBillFunc();
 
@@ -40,7 +40,7 @@ describe('The textBill function' ,
             }
         );
 
-        it ('should calculate 2 smses and three calls', 
+        it ('should calculate 2 smses (R0.75 each) and three calls R(2.75 each)', 
             function () {
                 let textBill = TextBillFunc();
 
