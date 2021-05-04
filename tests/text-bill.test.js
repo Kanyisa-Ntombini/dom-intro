@@ -1,35 +1,59 @@
 describe('The textBill function' , 
     function() {
-        it ('should return "Please enter call or sms" for 800' , 
+        it ('should check if functions work', 
             function () {
-                assert.deepEqual("Please enter call or sms", textBillFunc(800));
+                let textBill = TextBillFunc();
+                textBill.makeCall();
+                textBill.makeCall();
+                textBill.makeCall();
+
+                assert.deepEqual(8.25, textBill.getTotalCallCost());
+                assert.deepEqual(0.00, textBill.getTotalSmsCost());
+                assert.deepEqual(8.25, textBill.getTotalCost());
             }
         );
 
-        it ('should return "Please enter call or sms" for "Mount Everest"' , 
+        it ('should calculate call cost for two calls', 
             function () {
-                assert.deepEqual("Please enter call or sms", textBillFunc("Mount Everest"));
+                let textBill = TextBillFunc();
+                textBill.makeCall();
+                textBill.makeCall();
+
+                assert.deepEqual(5.50, textBill.getTotalCallCost());
+                assert.deepEqual(0.00, textBill.getTotalSmsCost());
+                assert.deepEqual(5.50, textBill.getTotalCost());
             }
         );
 
-        it ('should return R0.00 for ""' , 
+        it ('should calculate sms cost for four smses', 
             function () {
-                assert.deepEqual(0, textBillFunc(""));
+                let textBill = TextBillFunc();
+
+                textBill.sendSms();
+                textBill.sendSms();
+                textBill.sendSms();
+                textBill.sendSms();
+
+                assert.deepEqual(0.00, textBill.getTotalCallCost());
+                assert.deepEqual(3.00, textBill.getTotalSmsCost());
+                assert.deepEqual(3.00, textBill.getTotalCost());
             }
         );
 
-        it ('should return R4.25 for "sms"' , 
+        it ('should calculate 2 smses and three calls', 
             function () {
-                assert.deepEqual(4.25, textBillFunc("sms"));
-            }
-        );
+                let textBill = TextBillFunc();
 
-        it ('should return R16.75 for inserted string' , 
-            function () {
-                var string = "call";
-                assert.deepEqual(16.75, textBill(string));
+                textBill.sendSms();
+                textBill.sendSms();
+                textBill.makeCall();
+                textBill.makeCall();
+                textBill.makeCall();
+
+                assert.deepEqual(8.25, textBill.getTotalCallCost());
+                assert.deepEqual(1.50, textBill.getTotalSmsCost());
+                assert.deepEqual(9.75, textBill.getTotalCost());
             }
         );
-        
     }
 );
