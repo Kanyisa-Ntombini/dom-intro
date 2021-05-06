@@ -4,7 +4,8 @@ function CalculateBill() {
 	var totalCostSms = 0;
 	var totalCostCall = 0;
 	var totalCost = 0;
-	var stringAnswer = "ans";
+	var stringAnswer = ""; /*if this is not empty then print it. Else update 
+	the call, sms and total amounts*/
 
 	function checkString(textString) {
 		if ((typeof textString) !== 'string') {
@@ -38,7 +39,7 @@ function CalculateBill() {
 				totalCostCall += 0;
 				totalCost += 0;
 			} else {
-				stringAnswer += "Please only type 'call' or 'sms'";
+				stringAnswer = "Please only type 'call' or 'sms'";
 			}
 		}
 	}
@@ -51,11 +52,30 @@ function CalculateBill() {
 		return totalCostCall;
 	}
 
+	function getSmsTotalAmount() {
+		return totalCostSms;
+	}
+
+	function getTotalAmount() {
+		return totalCost;
+	}
+
+	function getClassName() {
+		if (totalCost >= 5 && totalCost <9) {
+			return 'warning';
+		} else if (totalCost >= 9) {
+			return 'danger';
+		}
+	} 
+
 	return {
 		checkString,
 		getTrimList,
 		calcStringBill,
 		getStringAns,
-		getCallTotalAmount
+		getCallTotalAmount,
+		getSmsTotalAmount,
+		getTotalAmount,
+		getClassName 
 	}
 }
