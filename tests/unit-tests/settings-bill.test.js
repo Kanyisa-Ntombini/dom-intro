@@ -4,10 +4,14 @@ describe('The SettingsBill function',
             function () {
                 let settingsBill = SettingsBillFunc();
                 settingsBill.setCallCost(2);
+                settingsBill.setWarningLevel(5);
+                settingsBill.setCriticalLevel(10);
                 assert.deepEqual(2, settingsBill.getCallCost());
 
                 let settingsBill2 = SettingsBillFunc();
                 settingsBill2.setCallCost(3);
+                settingsBill2.setWarningLevel(5);
+                settingsBill2.setCriticalLevel(10);
                 assert.deepEqual(3, settingsBill2.getCallCost());
             }
         );
@@ -16,10 +20,14 @@ describe('The SettingsBill function',
             function () {
                 let settingsBill = SettingsBillFunc();
                 settingsBill.setSmsCost(0.55);
+                settingsBill.setWarningLevel(5);
+                settingsBill.setCriticalLevel(10);
                 assert.deepEqual(0.55, settingsBill.getSmsCost());
 
                 let settingsBill2 = SettingsBillFunc();
                 settingsBill2.setSmsCost(1.25);
+                settingsBill2.setWarningLevel(5);
+                settingsBill2.setCriticalLevel(10);
                 assert.deepEqual(1.25, settingsBill2.getSmsCost());
             }
         );
@@ -28,6 +36,7 @@ describe('The SettingsBill function',
             function () {
                 let settingsBill = SettingsBillFunc();
                 settingsBill.setWarningLevel(25);
+                settingsBill.setCriticalLevel(50);
                 assert.deepEqual(25, settingsBill.getWarningLevel());
 
                 let settingsBill2 = SettingsBillFunc();
@@ -40,10 +49,12 @@ describe('The SettingsBill function',
             function () {
                 let settingsBill = SettingsBillFunc();
                 settingsBill.setCriticalLevel(35);
+                settingsBill.setWarningLevel(5);
                 assert.deepEqual(35, settingsBill.getCriticalLevel());
 
                 let settingsBill2 = SettingsBillFunc();
                 settingsBill2.setCriticalLevel(50);
+                settingsBill2.setWarningLevel(5);
                 assert.deepEqual(50, settingsBill2.getCriticalLevel());
             }
         );
@@ -52,6 +63,8 @@ describe('The SettingsBill function',
             function () {
                 let settingsBill = SettingsBillFunc();
                 settingsBill.setCallCost(2.10);
+                settingsBill.setWarningLevel(5);
+                settingsBill.setCriticalLevel(10);
 
                 settingsBill.makeCall();
                 settingsBill.makeCall();
@@ -66,6 +79,8 @@ describe('The SettingsBill function',
             function () {
                 let settingsBill = SettingsBillFunc();
                 settingsBill.setSmsCost(0.95);
+                settingsBill.setWarningLevel(5);
+                settingsBill.setCriticalLevel(10);
 
                 settingsBill.sendSms();
                 settingsBill.sendSms();
@@ -83,6 +98,8 @@ describe('The SettingsBill function',
                 let settingsBill = SettingsBillFunc();
                 settingsBill.setSmsCost(0.95);
                 settingsBill.setCallCost(3.35);
+                settingsBill.setWarningLevel(5);
+                settingsBill.setCriticalLevel(10);
 
                 settingsBill.sendSms();
                 settingsBill.makeCall();
@@ -137,8 +154,8 @@ describe('The SettingsBill function',
         it('the total amount should stop updating when the danger level is reached',
             function () {
                 let settingsBill = SettingsBillFunc();
-                settingsBill.setSmsCost(0.95);
-                settingsBill.setCallCost(3.35);
+                settingsBill.setSmsCost(1);
+                settingsBill.setCallCost(2);
                 settingsBill.setWarningLevel(5);
                 settingsBill.setCriticalLevel(10);
 
@@ -153,8 +170,8 @@ describe('The SettingsBill function',
                 settingsBill.makeCall();
                 settingsBill.makeCall();
 
+                assert.deepEqual(11,settingsBill.getTotalCost());
                 assert.deepEqual('danger', settingsBill.getClassTotal());
-                assert.deepEqual(12,settingsBill.getTotalCost());
             }
         );
     }
