@@ -62,6 +62,14 @@ function SettingsBillFunc() {
         return totalSmsCost + totalCallCost;
     }
 
+    function getClassTotal() {
+        if (getTotalCost() >= 5 && getTotalCost() < 10) {
+            return 'warning';
+        } else if (getTotalCost() >= 10) {
+            return 'danger';
+        }
+    }
+
     return {
         setCallCost,
         getCallCost,
@@ -75,6 +83,7 @@ function SettingsBillFunc() {
         getTotalCallCost,
         sendSms,
         getTotalSmsCost,
-        getTotalCost
+        getTotalCost,
+        getClassTotal
     }
 }

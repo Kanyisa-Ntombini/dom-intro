@@ -94,5 +94,40 @@ describe('The SettingsBill function',
                 assert.deepEqual(11.00, settingsBill.getTotalCost());
             }
         );
+
+        it('should if the warning level has been reached',
+            function () {
+                let settingsBill = SettingsBillFunc();
+                settingsBill.setSmsCost(0.95);
+                settingsBill.setCallCost(3.35);
+
+                settingsBill.sendSms();
+                settingsBill.sendSms();
+                settingsBill.sendSms();
+                settingsBill.makeCall();
+                settingsBill.makeCall();
+
+                assert.deepEqual('warning', settingsBill.getClassTotal());
+            }
+        );
+
+        it('should if the danger level has been reached',
+            function () {
+                let settingsBill = SettingsBillFunc();
+                settingsBill.setSmsCost(0.95);
+                settingsBill.setCallCost(3.35);
+
+                settingsBill.makeCall();
+                settingsBill.sendSms();
+                settingsBill.sendSms();
+                settingsBill.sendSms();
+                settingsBill.sendSms();
+                settingsBill.sendSms();
+                settingsBill.makeCall();
+                settingsBill.makeCall();
+
+                assert.deepEqual('danger', settingsBill.getClassTotal());
+            }
+        );
     }
 )
