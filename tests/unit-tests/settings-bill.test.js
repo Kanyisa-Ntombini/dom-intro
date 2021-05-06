@@ -100,6 +100,8 @@ describe('The SettingsBill function',
                 let settingsBill = SettingsBillFunc();
                 settingsBill.setSmsCost(0.95);
                 settingsBill.setCallCost(3.35);
+                settingsBill.setWarningLevel(5);
+                settingsBill.setCriticalLevel(10);
 
                 settingsBill.sendSms();
                 settingsBill.sendSms();
@@ -116,6 +118,8 @@ describe('The SettingsBill function',
                 let settingsBill = SettingsBillFunc();
                 settingsBill.setSmsCost(0.95);
                 settingsBill.setCallCost(3.35);
+                settingsBill.setWarningLevel(5);
+                settingsBill.setCriticalLevel(10);
 
                 settingsBill.makeCall();
                 settingsBill.sendSms();
@@ -127,6 +131,30 @@ describe('The SettingsBill function',
                 settingsBill.makeCall();
 
                 assert.deepEqual('danger', settingsBill.getClassTotal());
+            }
+        );
+
+        it('the total amount should stop updating when the danger level is reached',
+            function () {
+                let settingsBill = SettingsBillFunc();
+                settingsBill.setSmsCost(0.95);
+                settingsBill.setCallCost(3.35);
+                settingsBill.setWarningLevel(5);
+                settingsBill.setCriticalLevel(10);
+
+                settingsBill.makeCall();
+                settingsBill.sendSms();
+                settingsBill.sendSms();
+                settingsBill.sendSms();
+                settingsBill.sendSms();
+                settingsBill.sendSms();
+                settingsBill.makeCall();
+                settingsBill.makeCall();
+                settingsBill.makeCall();
+                settingsBill.makeCall();
+
+                assert.deepEqual('danger', settingsBill.getClassTotal());
+                assert.deepEqual(12,settingsBill.getTotalCost());
             }
         );
     }

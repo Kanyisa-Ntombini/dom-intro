@@ -63,9 +63,9 @@ function SettingsBillFunc() {
     }
 
     function getClassTotal() {
-        if (getTotalCost() >= 5 && getTotalCost() < 10) {
+        if (getTotalCost() >= getWarningLevel() && getTotalCost() < getCriticalLevel()) {
             return 'warning';
-        } else if (getTotalCost() >= 10) {
+        } else if (getTotalCost() >= getCriticalLevel()) {
             return 'danger';
         }
     }
