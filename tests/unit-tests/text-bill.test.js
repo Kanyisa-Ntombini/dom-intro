@@ -1,6 +1,6 @@
-describe('The textBill function' , 
+describe('the TextBill function:' , 
     function() {
-        it ('should check if functions work', 
+        it ('should check if makeCall functions work', 
             function () {
                 let textBill = TextBillFunc();
                 textBill.makeCall();
@@ -8,8 +8,24 @@ describe('The textBill function' ,
                 textBill.makeCall();
 
                 assert.deepEqual(8.25, textBill.getTotalCallCost());
-                assert.deepEqual(0.00, textBill.getTotalSmsCost());
-                assert.deepEqual(8.25, textBill.getTotalCost());
+            }
+        );
+
+        it ('should check if sendSms functions work', 
+            function () {
+                let textBill = TextBillFunc();
+                textBill.sendSms();
+                textBill.sendSms();
+
+                assert.deepEqual(1.50, textBill.getTotalSmsCost());
+            }
+        );
+
+        it ('should check if gettotalCost function works', 
+            function () {
+                let textBill = TextBillFunc();
+
+                assert.deepEqual(0.00, textBill.getTotalCost());
             }
         );
 
@@ -53,6 +69,35 @@ describe('The textBill function' ,
                 assert.deepEqual(8.25, textBill.getTotalCallCost());
                 assert.deepEqual(1.50, textBill.getTotalSmsCost());
                 assert.deepEqual(9.75, textBill.getTotalCost());
+            }
+        );
+
+        it ('should check if the warning level works', 
+            function () {
+                let textBill = TextBillFunc();
+                textBill.makeCall();
+                textBill.makeCall();
+                textBill.sendSms();
+                textBill.sendSms();
+
+                assert.deepEqual('warning', textBill.getTotalClassName());
+            }
+        );
+
+        it ('should check if the danger level works', 
+            function () {
+                let textBill = TextBillFunc();
+                textBill.makeCall();
+                textBill.makeCall();
+                textBill.makeCall();
+                textBill.makeCall();
+                textBill.makeCall();
+                textBill.sendSms();
+                textBill.sendSms();
+                textBill.sendSms();
+                textBill.sendSms();
+
+                assert.deepEqual('danger', textBill.getTotalClassName());
             }
         );
     }

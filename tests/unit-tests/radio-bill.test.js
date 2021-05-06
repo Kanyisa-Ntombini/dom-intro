@@ -54,5 +54,35 @@ describe('The radioBill function' ,
                 assert.deepEqual(4.25, radioBill.getTotalCost());
             }
         );
+
+        it('should check if the warning level works',
+            function () {
+                let radioBill = RadioBillFunc();
+                radioBill.sendText();
+                radioBill.sendText();
+                radioBill.makeCall();
+                radioBill.makeCall();
+                radioBill.makeCall();
+
+                assert.deepEqual('warning', radioBill.getClassName());
+            }
+        );
+
+        it('should check if the danger level works',
+            function () {
+                let radioBill = RadioBillFunc();
+                radioBill.sendText();
+                radioBill.sendText();
+                radioBill.sendText();
+                radioBill.sendText();
+                radioBill.sendText();
+                radioBill.sendText();
+                radioBill.makeCall();
+                radioBill.makeCall();
+                radioBill.makeCall();
+
+                assert.deepEqual('danger', radioBill.getClassName());
+            }
+        );
     }
 );

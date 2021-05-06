@@ -1,70 +1,61 @@
-//get a reference to the calculate button
-const calculateButton = document.querySelector(".calculateBtn");
+function CalculateBill() {
+	var trimList = [];
+	var theTextString = "";
+	var totalCostSms = 0;
+	var totalCostCall = 0;
+	var totalCost = 0;
+	var stringAnswer = "ans";
 
-//get a reference to the billTotal element
-const billTotal = document.querySelector(".billTotal");
+	function checkString(textString) {
+		if ((typeof textString) !== 'string') {
+			return "Please only type 'call' or 'sms'";
+		} else {
+			theTextString = textString;
+		}
+	}
 
-//get a reference to the billString
-const billString = document.querySelector(".billString");
+	function getTrimList() {
+		var textList = theTextString.split(",")
+		for (var i=0; i<textList.length; i++) {
+			var item = textList[i].trim();
+			trimList.push(item);
+		}
+		return trimList;
+	}
 
-/* === FUNCTION FOR CALCULATING TOTAL PHONE BILL */
-function totalPhoneBill(phoneRecord) {
-	var answer = "";
+	function calcStringBill() {
+		for (var i=0; i<trimList.length; i++){
+			var item = trimList[i];
 
-	if ((typeof phoneRecord) === 'string') {
-		var phoneRecordList = phoneRecord.split(',');
-		var cost = 0;
-
-		for (var i = 0; i < phoneRecordList.length; i++) {
-			var item = phoneRecordList[i].trim();
-
-			switch (item) {
-				case 'call':
-					cost += 2.75;
-					break;
-				case 'sms':
-					cost += 0.75;
-					break;
-				case '':
-					cost += 0;
-					break;
-				default:
-					return "Please only type call or sms";
+			if (item === 'sms') {
+				totalCostSms += 0.75;
+				totalCost += 0.75;
+			} else if (item === 'call') {
+				totalCostCall += 2.75;
+				totalCost += 2.75;
+			} else if (item === '') {
+				totalCostSms += 0;
+				totalCostCall += 0;
+				totalCost += 0;
+			} else {
+				stringAnswer += "Please only type 'call' or 'sms'";
 			}
 		}
-
-		return cost;
-
 	}
-	else {
-		return "Please enter a string";
+
+	function getStringAns () {
+		return stringAnswer;
 	}
-}
 
-//create the function that will be called when the calculate button is pressed
-//  * this function should read the string value entered - split it on a comma.
-//  * loop over all the entries in the the resulting list
-//  * check if it is a call or an sms and add the right amount to the overall total
-//  * once done looping over all the entries - display the total onto the screen in the billTotal element
-function totalPhoneBillEvent() {
-	var phoneRecord = billString.value;
-	var totalBill = totalPhoneBill(phoneRecord);
+	function getCallTotalAmount() {
+		return totalCostCall;
+	}
 
-	if ((typeof totalBill) === 'string') {
-		billString.innerHTML = totalBill;
-	} else {
-		billTotal.innerHTML = totalBill.toFixed(2);
-
-		//Displaying the total bill
-		billTotal.classList.remove("warning");
-		billTotal.classList.remove("danger");
-		if (totalBill >= 20.00 && totalBill < 30.00) {
-			billTotal.classList.add("warning");
-		} else if (totalBill >= 30.00) {
-			billTotal.classList.add("danger");
-		}	
+	return {
+		checkString,
+		getTrimList,
+		calcStringBill,
+		getStringAns,
+		getCallTotalAmount
 	}
 }
-
-//link the function to a click event on the calculate button
-calculateButton.addEventListener("click", totalPhoneBillEvent);

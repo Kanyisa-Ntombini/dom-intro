@@ -22,11 +22,22 @@ function TextBillFunc () {
         return totalCall + totalSms;
     }
 
+    function getTotalClassName() {
+        if (getTotalCost() >= 6 && getTotalCost() < 12) {
+            return 'warning';
+        }
+
+        else if (getTotalCost() >= 12) {
+            return 'danger';
+        }
+    }
+
     return {
         makeCall,
         sendSms,
         getTotalCallCost,
         getTotalSmsCost,
-        getTotalCost
+        getTotalCost,
+        getTotalClassName
     }
 }
