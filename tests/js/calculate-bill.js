@@ -73,3 +73,30 @@ function CalculateBill() {
 		getClassTotal
 	}
 }
+
+/* === CALCULATE BUTTON === */
+var calcButton = document.querySelector(".calculateBtn");
+
+function calcBillEventFunc() {
+	var billString = document.querySelector(".billString");
+
+	//calculating amounts
+	var calcBillObj = CalculateBill();
+	calcBillObj.checkString(billString.value);
+	calcBillObj.calcBill();
+
+	//the totals output
+	var totalOutput = document.querySelector('.billTotal');
+	totalOutput.innerHTML = calcBillObj.getTotal().toFixed(2);
+
+	//warning and critical levels
+	totalOutput.classList.remove('warning');
+	totalOutput.classList.remove('danger');
+	if (calcBillObj.getClassTotal() === 'warning') {
+		totalOutput.classList.add('warning');
+	} else if (calcBillObj.getClassTotal() === 'danger') {
+		totalOutput.classList.add('danger');
+	}
+}
+
+calcButton.addEventListener("click", calcBillEventFunc);

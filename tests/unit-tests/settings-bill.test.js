@@ -174,5 +174,33 @@ describe('The SettingsBill function',
                 assert.deepEqual('danger', settingsBill.getClassTotal());
             }
         );
+
+        it('it should allow for the critical level to be updated',
+            function () {
+                let settingsBill = SettingsBillFunc();
+                settingsBill.setSmsCost(1.25);
+                settingsBill.setCallCost(3.35);
+                settingsBill.setWarningLevel(5);
+                settingsBill.setCriticalLevel(10);
+
+                settingsBill.makeCall();
+                settingsBill.sendSms();
+                settingsBill.sendSms();
+                settingsBill.makeCall();
+                settingsBill.makeCall();
+                settingsBill.sendSms();
+
+                assert.deepEqual(12.55,settingsBill.getTotalCost());
+                assert.deepEqual('danger', settingsBill.getClassTotal());
+
+                settingsBill.setCriticalLevel(15);
+                settingsBill.makeCall();
+                settingsBill.sendSms();
+                settingsBill.sendSms();
+
+                assert.deepEqual(15.9,settingsBill.getTotalCost());
+                assert.deepEqual('danger', settingsBill.getClassTotal());
+            }
+        );
     }
 )

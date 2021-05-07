@@ -41,3 +41,29 @@ function TextBillFunc () {
         getTotalClassName
     }
 }
+
+const addBtn = document.querySelector('.addToBillBtn');
+
+function textBillEventFunc() {
+    var inputString = document.querySelector('.billTypeText');
+    console.log(inputString.value);
+
+    //calculating amounts
+	var calcBillObj = TextBillFunc();
+	if (inputString.value === 'call') {
+        calcBillObj.makeCall();
+    } else if (inputString.value === 'sms') {
+        calcBillObj.sendSms();
+    }
+
+   //the totals output
+	var totalOutput = document.querySelector('.totalOne');
+    var totalCallOutput = document.querySelector('.callTotalOne');
+    var totalSmsOutput = document.querySelector('.smsTotalOne');
+
+	totalOutput.innerHTML = calcBillObj.getTotalCost();
+    totalCallOutput.innerHTML = calcBillObj.getTotalCallCost();
+    totalSmsOutput.innerHTML = calcBillObj.getTotalSmsCost();
+}
+
+addBtn.addEventListener("click", textBillEventFunc);
