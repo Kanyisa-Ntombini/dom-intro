@@ -98,3 +98,43 @@ function SettingsBillFunc() {
         criticalLevelReached
     }
 }
+
+const updateSettingsBtn = document.querySelector('.updateSettings');
+const addButtonSettings = document.querySelector('.addButton');
+//settings
+var callSet = 0;
+var smsSet = 0;
+var warningSet = 0;
+var criticalSet = 0;
+
+function UpdateSettingsEvent () {
+    //settings 
+    var callCostSetting = document.querySelector('.callCostSetting').value;
+    var smsCostSetting = document.querySelector('.smsCostSetting').value;
+    var warningLevelSetting = document.querySelector('.warningLevelSetting').value;
+    var criticalLevelSetting = document.querySelector('.criticalLevelSetting').value;
+
+    //make objects and initialise
+    var settingsObj = SettingsBillFunc();
+    settingsObj.setCallCost(callCostSetting);
+    settingsObj.setSmsCost(smsCostSetting);
+    settingsObj.setWarningLevel(warningLevelSetting);
+    settingsObj.setCriticalLevel(criticalLevelSetting);
+
+    callSet = settingsObj.getCallCost();
+    smsSet = settingsObj.getSmsCost();
+    warningSet = settingsObj.getWarningLevel();
+    criticalSet = settingsObj.getCriticalLevel();
+}
+
+function SettingsBillEvent() {
+    //radio bill settings
+    var settingsRadioBtn = document.querySelector('.billItemTypeWithSettings:checked').value;
+    console.log(settingsRadioBtn);
+
+    var settingsBillObj = SettingsBillFunc();
+
+}
+
+updateSettingsBtn.addEventListener('click', UpdateSettingsEvent);
+addButtonSettings.addEventListener('click', SettingsBillEvent);
