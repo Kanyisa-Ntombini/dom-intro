@@ -55,9 +55,9 @@ function CalculateBill() {
 	}
 
 	function getClassTotal() {
-		if (getTotal() >= 5 && getTotal() < 10) {
+		if (getTotal() >= 20 && getTotal() < 30) {
 			return 'warning';
-		} else if (getTotal() >= 10) {
+		} else if (getTotal() >= 30) {
 			return 'danger';
 		}
 	}

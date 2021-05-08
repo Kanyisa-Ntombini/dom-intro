@@ -43,4 +43,44 @@ function RadioBillFunc () {
     }
 }
 
+var radioAddBtn = document.querySelector('.radioBillAddBtn');
+var smsTot = 0;
+var callTot = 0;
+var phoneTot = 0;
 
+function calcRadioBillEvent() {
+    var inputBillType = document.querySelector(".billItemTypeRadio:checked");
+    var calcRadioBill = RadioBillFunc();
+
+    //making calls or sending texts
+    if (inputBillType.value === 'call') {
+        calcRadioBill.makeCall();
+    } else if (inputBillType.value === 'sms') {
+        calcRadioBill.sendText();
+    }
+    
+    //calcilating total amounts
+    smsTot += calcRadioBill.getTotalSmsCost();
+    callTot += calcRadioBill.getTotalCallCost();
+    phoneTot += calcRadioBill.getTotalCost();
+
+    //outputs
+    var callOut = document.querySelector('.callTotalTwo');
+    var smsOut = document.querySelector('.smsTotalTwo');
+    var phoneOut = document.querySelector('.totalTwo');
+
+    callOut.innerHTML = callTot.toFixed(2);
+    smsOut.innerHTML = smsTot.toFixed(2);
+    phoneOut.innerHTML = phoneTot.toFixed(2);
+
+    //warning and critical levels
+    phoneOut.classList.remove('warning');
+    phoneOut.classList.remove('danger');
+    if (phoneTot >= 30 && phoneTot < 50) {
+        phoneOut.classList.add('warning');
+    } else if (phoneTot >= 50) {
+        phoneOut.classList.add('danger');
+    }
+}
+
+radioAddBtn.addEventListener("click", calcRadioBillEvent);

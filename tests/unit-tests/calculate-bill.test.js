@@ -75,7 +75,7 @@ describe('The totalPhoneBill function' ,
         it ('should check if warning level works' , 
             function () {
                 let calculateBill = CalculateBill();
-                calculateBill.checkString('call, call, call, sms, sms');
+                calculateBill.checkString('call, call, call, sms, sms, call, call, sms, sms, call, call');
                 calculateBill.calcBill();
             
                 assert.deepEqual("warning", calculateBill.getClassTotal());
@@ -85,7 +85,7 @@ describe('The totalPhoneBill function' ,
         it ('should check if danger level works' , 
             function () {
                 let calculateBill = CalculateBill();
-                calculateBill.checkString('call, call, call, sms, sms, sms, sms, sms');
+                calculateBill.checkString('call, call, call, sms, sms, sms, sms, sms, call, call, call, sms, sms, sms, sms, sms, call, call, sms, sms, sms');
                 calculateBill.calcBill();
             
                 assert.deepEqual("danger", calculateBill.getClassTotal());

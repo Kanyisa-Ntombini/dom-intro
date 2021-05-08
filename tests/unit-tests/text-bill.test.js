@@ -75,10 +75,20 @@ describe('the TextBill function:' ,
         it ('should check if the warning level works', 
             function () {
                 let textBill = TextBillFunc();
+                
+                textBill.sendSms();
+                textBill.makeCall();
+                textBill.makeCall();
+                textBill.makeCall();
                 textBill.makeCall();
                 textBill.makeCall();
                 textBill.sendSms();
-                textBill.sendSms();
+                textBill.makeCall();
+                textBill.makeCall();
+                textBill.makeCall();
+                textBill.makeCall();
+                textBill.makeCall();
+                textBill.makeCall();
 
                 assert.deepEqual('warning', textBill.getTotalClassName());
             }
@@ -87,15 +97,27 @@ describe('the TextBill function:' ,
         it ('should check if the danger level works', 
             function () {
                 let textBill = TextBillFunc();
+
+                textBill.sendSms();
                 textBill.makeCall();
                 textBill.makeCall();
                 textBill.makeCall();
                 textBill.makeCall();
                 textBill.makeCall();
                 textBill.sendSms();
-                textBill.sendSms();
-                textBill.sendSms();
-                textBill.sendSms();
+                textBill.makeCall();
+                textBill.makeCall();
+                textBill.makeCall();
+                textBill.makeCall();
+                textBill.makeCall();
+                textBill.makeCall();
+                textBill.makeCall();
+                textBill.makeCall();
+                textBill.makeCall();
+                textBill.makeCall();
+                textBill.makeCall();
+                textBill.makeCall();
+                textBill.makeCall();
 
                 assert.deepEqual('danger', textBill.getTotalClassName());
             }
