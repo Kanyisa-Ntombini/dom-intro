@@ -122,6 +122,10 @@ function updateSettingsEvent () {
     settingsObj.setSmsCost(smsCostSetting);
     settingsObj.setWarningLevel(warningLevelSetting);
     settingsObj.setCriticalLevel(criticalLevelSetting);
+
+    //warning and critical levels
+    phoneOut.classList.remove('warning');
+    phoneOut.classList.remove('danger');
 }
 
 function SettingsCalcEvent() {
@@ -137,12 +141,10 @@ function SettingsCalcEvent() {
     callOut.innerHTML = settingsObj.getTotalCallCost().toFixed(2);
     phoneOut.innerHTML = settingsObj.getTotalCost().toFixed(2);
 
-    //critical and warning level
-    phoneOut.classList.remove('warning');
-    phoneOut.classList.remove('danger');
-    if (settingsObj.getTotalCost() >= settingsObj.getWarningLevel() && settingsObj.getTotalCost() < settingsObj.getCriticalLevel()) {
+    //warning and critical levels
+    if (settingsObj.getClassTotal() === 'warning') {
         phoneOut.classList.add('warning');
-    } else if (settingsObj.getTotalCost() >= settingsObj.getCriticalLevel()) {
+    } else if (settingsObj.getClassTotal() === 'danger') {
         phoneOut.classList.add('danger');
     }
 }
