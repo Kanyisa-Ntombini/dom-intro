@@ -43,13 +43,10 @@ function TextBillFunc () {
 }
 
 const addBtn = document.querySelector('.addToBillBtn');
-var callTot = 0;
-var smsTot = 0;
-var phoneTot = 0;
+var calcBillObj = TextBillFunc();
 
 function textBillEventFunc() {
     var inputString = document.querySelector('.billTypeText');
-    var calcBillObj = TextBillFunc();
 
     //calculating amounts
 	if (inputString.value === 'sms') {
@@ -58,25 +55,21 @@ function textBillEventFunc() {
         calcBillObj.makeCall();
     }
 
-    smsTot += calcBillObj.getTotalSmsCost();
-    callTot += calcBillObj.getTotalCallCost();
-    phoneTot = smsTot + callTot;
-
     //the outputs
     var callOut = document.querySelector('.callTotalOne');
     var smsOut = document.querySelector('.smsTotalOne');
     var phoneOut = document.querySelector('.totalOne');
 
-    callOut.innerHTML = callTot.toFixed(2);
-    smsOut.innerHTML = smsTot.toFixed(2);
-    phoneOut.innerHTML = phoneTot.toFixed(2);
+    callOut.innerHTML = calcBillObj.getTotalCallCost().toFixed(2);
+    smsOut.innerHTML = calcBillObj.getTotalSmsCost().toFixed(2);
+    phoneOut.innerHTML = calcBillObj.getTotalCost().toFixed(2);
 
     //warning and critical levels
     phoneOut.classList.remove('warning');
     phoneOut.classList.remove('danger');
-    if (phoneTot >= 30 && phoneTot < 50) {
+    if (calcBillObj.getTotalCost() >= 30 && calcBillObj.getTotalCost() < 50) {
         phoneOut.classList.add('warning');
-    } else if (phoneTot >= 50) {
+    } else if (calcBillObj.getTotalCost() >= 50) {
         phoneOut.classList.add('danger');
     }
 }

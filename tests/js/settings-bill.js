@@ -8,33 +8,34 @@ function SettingsBillFunc() {
     var totalCallCost = 0;
     var totalSmsCost = 0;
 
-    //SETTERS AND GETTERS
+    //SETTERS 
     function setCallCost(callCost) {
-        theCallCost = callCost;
-    }
-    
-    function getCallCost() {
-        return theCallCost;
+        theCallCost = parseFloat(callCost);
     }
 
     function setSmsCost(smsCost) {
-        theSmsCost = smsCost;
-    }
-    
-    function getSmsCost() {
-        return theSmsCost;
+        theSmsCost = parseFloat(smsCost);
     }
 
     function setWarningLevel(warningLevel) {
         theWarningLevel = warningLevel;
     }
 
-    function getWarningLevel() {
-        return theWarningLevel;
-    }
-
     function setCriticalLevel(criticalLevel) {
         theCriticalLevel = criticalLevel;
+    }
+
+    //GETTERS
+    function getSmsCost() {
+        return theSmsCost;
+    }
+
+    function getCallCost() {
+        return theCallCost;
+    }
+
+    function getWarningLevel() {
+        return theWarningLevel;
     }
 
     function getCriticalLevel() {
@@ -48,14 +49,15 @@ function SettingsBillFunc() {
         }
     }
 
-    function getTotalCallCost() {
-        return totalCallCost;
-    }
-
     function sendSms() {
         if (!criticalLevelReached()) {
             totalSmsCost += theSmsCost;
         }
+    }
+
+    //GET TOTAL COSTS
+    function getTotalCallCost() {
+        return totalCallCost;
     }
 
     function getTotalSmsCost() {
@@ -66,6 +68,7 @@ function SettingsBillFunc() {
         return totalSmsCost + totalCallCost;
     }
 
+    //WARNING AND CRITICAL LEVEL
     function criticalLevelReached () {
         return getTotalCost() >= getCriticalLevel();
     }
@@ -99,15 +102,15 @@ function SettingsBillFunc() {
     }
 }
 
+var settingsObj = SettingsBillFunc();
 const updateSettingsBtn = document.querySelector('.updateSettings');
 const addButtonSettings = document.querySelector('.addButton');
-//settings
-var callSet = 0;
-var smsSet = 0;
-var warningSet = 0;
-var criticalSet = 0;
+//outputs
+var smsOut = document.querySelector('.smsTotalSettings');
+var callOut = document.querySelector('.callTotalSettings');
+var phoneOut = document.querySelector('.totalSettings');
 
-function UpdateSettingsEvent () {
+function updateSettingsEvent () {
     //settings 
     var callCostSetting = document.querySelector('.callCostSetting').value;
     var smsCostSetting = document.querySelector('.smsCostSetting').value;
@@ -115,26 +118,34 @@ function UpdateSettingsEvent () {
     var criticalLevelSetting = document.querySelector('.criticalLevelSetting').value;
 
     //make objects and initialise
-    var settingsObj = SettingsBillFunc();
     settingsObj.setCallCost(callCostSetting);
     settingsObj.setSmsCost(smsCostSetting);
     settingsObj.setWarningLevel(warningLevelSetting);
     settingsObj.setCriticalLevel(criticalLevelSetting);
-
-    callSet = settingsObj.getCallCost();
-    smsSet = settingsObj.getSmsCost();
-    warningSet = settingsObj.getWarningLevel();
-    criticalSet = settingsObj.getCriticalLevel();
 }
 
-function SettingsBillEvent() {
-    //radio bill settings
-    var settingsRadioBtn = document.querySelector('.billItemTypeWithSettings:checked').value;
-    console.log(settingsRadioBtn);
+function SettingsCalcEvent() {
+    var billTypeSettings = document.querySelector(".billItemTypeWithSettings:checked").value;
+    
+    if (billTypeSettings === 'call') {
+        settingsObj.makeCall();
+    } else if (billTypeSettings === 'sms') {
+        settingsObj.sendSms();
+    }
 
-    var settingsBillObj = SettingsBillFunc();
+    smsOut.innerHTML = settingsObj.getTotalSmsCost().toFixed(2);
+    callOut.innerHTML = settingsObj.getTotalCallCost().toFixed(2);
+    phoneOut.innerHTML = settingsObj.getTotalCost().toFixed(2);
 
+    //critical and warning level
+    phoneOut.classList.remove('warning');
+    phoneOut.classList.remove('danger');
+    if (settingsObj.getTotalCost() >= settingsObj.getWarningLevel() && settingsObj.getTotalCost() < settingsObj.getCriticalLevel()) {
+        phoneOut.classList.add('warning');
+    } else if (settingsObj.getTotalCost() >= settingsObj.getCriticalLevel()) {
+        phoneOut.classList.add('danger');
+    }
 }
 
-updateSettingsBtn.addEventListener('click', UpdateSettingsEvent);
-addButtonSettings.addEventListener('click', SettingsBillEvent);
+updateSettingsBtn.addEventListener('click', updateSettingsEvent);
+addButtonSettings.addEventListener('click', SettingsCalcEvent);
