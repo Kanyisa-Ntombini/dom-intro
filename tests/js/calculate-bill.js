@@ -1,8 +1,8 @@
 function CalculateBill() {
-	var theBillString;
-	var totalAmountSms = 0;
-	var totalAmountCall = 0;
-	var answer;
+	let theBillString;
+	let totalAmountSms = 0;
+	let totalAmountCall = 0;
+	let answer;
 
 	function checkString(theString) {
 		if ((typeof theString) !== 'string') {
@@ -13,18 +13,18 @@ function CalculateBill() {
 	}
 
 	function getTrimList() {
-		var billStringList = theBillString.split(',');
-		var trimList = [];
-		for (var i = 0; i < billStringList.length; i++) {
-			var item = billStringList[i].trim();
+		let billStringList = theBillString.split(',');
+		let trimList = [];
+		for (let i = 0; i < billStringList.length; i++) {
+			let item = billStringList[i].trim();
 			trimList.push(item);
 		}
 		return trimList;
 	}
 
 	function calcBill() {
-		for (var i = 0; i < getTrimList().length; i++) {
-			var item = getTrimList()[i];
+		for (let i = 0; i < getTrimList().length; i++) {
+			let item = getTrimList()[i];
 			if (item === 'sms') {
 				totalAmountSms += 0.75;
 			} else if (item === 'call') {
@@ -75,18 +75,18 @@ function CalculateBill() {
 }
 
 /* === CALCULATE BUTTON === */
-var calcButton = document.querySelector(".calculateBtn");
+const calcButton = document.querySelector(".calculateBtn");
 
 function calcBillEventFunc() {
-	var billString = document.querySelector(".billString");
+	const billString = document.querySelector(".billString");
 
 	//calculating amounts
-	var calcBillObj = CalculateBill();
+	let calcBillObj = CalculateBill();
 	calcBillObj.checkString(billString.value);
 	calcBillObj.calcBill();
 
 	//the totals output
-	var totalOutput = document.querySelector('.billTotal');
+	let totalOutput = document.querySelector('.billTotal');
 	totalOutput.innerHTML = calcBillObj.getTotal().toFixed(2);
 
 	//warning and critical levels
