@@ -1,12 +1,12 @@
+/* === Factory Function === */ 
 function CalculateBill() {
 	let theBillString;
 	let totalAmountSms = 0;
 	let totalAmountCall = 0;
-	let answer;
 
 	function checkString(theString) {
-		if ((typeof theString) !== 'string') {
-			return "Please enter 'sms' or 'call'";
+		if (typeof theString !== 'string') {
+			alert("Please enter 'sms' or 'call'");
 		} else {
 			theBillString = theString;
 		}
@@ -23,6 +23,8 @@ function CalculateBill() {
 	}
 
 	function calcBill() {
+		let errorCalculator = 0;
+
 		for (let i = 0; i < getTrimList().length; i++) {
 			let item = getTrimList()[i];
 			if (item === 'sms') {
@@ -33,8 +35,12 @@ function CalculateBill() {
 				totalAmountSms += 0;
 				totalAmountCall += 0;
 			} else {
-				answer = "Please enter call or sms";
+				errorCalculator ++;
 			}
+		}
+
+		if (errorCalculator > 0) {
+			alert("Please enter call or sms");
 		}
 	}
 
@@ -48,10 +54,6 @@ function CalculateBill() {
 
 	function getTotal() {
 		return totalAmountCall + totalAmountSms;
-	}
-
-	function getAns() {
-		return answer;
 	}
 
 	function getClassTotal() {
@@ -69,24 +71,23 @@ function CalculateBill() {
 		getSmsTotal,
 		getCallsTotal,
 		getTotal,
-		getAns,
 		getClassTotal
 	}
 }
 
-/* === CALCULATE BUTTON === */
+/* === Code for DOM === */
 const calcButton = document.querySelector(".calculateBtn");
 
 function calcBillEventFunc() {
 	const billString = document.querySelector(".billString");
 
 	//calculating amounts
-	let calcBillObj = CalculateBill();
+	const calcBillObj = CalculateBill();
 	calcBillObj.checkString(billString.value);
 	calcBillObj.calcBill();
 
 	//the totals output
-	let totalOutput = document.querySelector('.billTotal');
+	const totalOutput = document.querySelector('.billTotal');
 	totalOutput.innerHTML = calcBillObj.getTotal().toFixed(2);
 
 	//warning and critical levels
