@@ -1,6 +1,7 @@
+/* === FACTORY FUNCTION === */
 function TextBillFunc () {
-    var totalCall = 0;
-    var totalSms = 0;
+    let totalCall = 0;
+    let totalSms = 0;
 
     function makeCall() {
         totalCall += 2.75;
@@ -42,11 +43,13 @@ function TextBillFunc () {
     }
 }
 
+/* === THE DOM CODE === */
+
 const addBtn = document.querySelector('.addToBillBtn');
-var calcBillObj = TextBillFunc();
 
 function textBillEventFunc() {
-    var inputString = document.querySelector('.billTypeText');
+    const calcBillObj = TextBillFunc();
+    const inputString = document.querySelector('.billTypeText');
 
     //calculating amounts
 	if (inputString.value === 'sms') {
@@ -56,9 +59,9 @@ function textBillEventFunc() {
     }
 
     //the outputs
-    var callOut = document.querySelector('.callTotalOne');
-    var smsOut = document.querySelector('.smsTotalOne');
-    var phoneOut = document.querySelector('.totalOne');
+    const callOut = document.querySelector('.callTotalOne');
+    const smsOut = document.querySelector('.smsTotalOne');
+    const phoneOut = document.querySelector('.totalOne');
 
     callOut.innerHTML = calcBillObj.getTotalCallCost().toFixed(2);
     smsOut.innerHTML = calcBillObj.getTotalSmsCost().toFixed(2);

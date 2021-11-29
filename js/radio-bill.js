@@ -1,6 +1,7 @@
+/* === FACTORY FUNCTION === */
 function RadioBillFunc () {
-    var totalCallRadio = 0;
-    var totalSmsRadio = 0;
+    let totalCallRadio = 0;
+    let totalSmsRadio = 0;
 
     function makeCall() {
         totalCallRadio += 2.75;
@@ -43,11 +44,12 @@ function RadioBillFunc () {
     }
 }
 
-var radioAddBtn = document.querySelector('.radioBillAddBtn');
-var calcRadioBill = RadioBillFunc();
+/* === THE DOM === */
+const radioAddBtn = document.querySelector('.radioBillAddBtn');
 
 function calcRadioBillEvent() {
-    var inputBillType = document.querySelector(".billItemTypeRadio:checked");
+    const calcRadioBill = RadioBillFunc();
+    const inputBillType = document.querySelector(".billItemTypeRadio:checked");
     
     //making calls or sending texts
     if (inputBillType.value === 'call') {
@@ -57,9 +59,9 @@ function calcRadioBillEvent() {
     }
 
     //outputs
-    var callOut = document.querySelector('.callTotalTwo');
-    var smsOut = document.querySelector('.smsTotalTwo');
-    var phoneOut = document.querySelector('.totalTwo');
+    const callOut = document.querySelector('.callTotalTwo');
+    const smsOut = document.querySelector('.smsTotalTwo');
+    const phoneOut = document.querySelector('.totalTwo');
 
     callOut.innerHTML = calcRadioBill.getTotalCallCost().toFixed(2);
     smsOut.innerHTML = calcRadioBill.getTotalSmsCost().toFixed(2);

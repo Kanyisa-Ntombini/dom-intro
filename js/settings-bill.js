@@ -1,14 +1,16 @@
+/* === FACTORY FUNCTION === */
 function SettingsBillFunc() {
-    var theCallCost = 0;
-    var theSmsCost = 0;
-    var theWarningLevel = 0;
-    var theCriticalLevel = 0;
+    //Inputs
+    let theCallCost = 0;
+    let theSmsCost = 0;
+    let theWarningLevel = 0;
+    let theCriticalLevel = 0;
 
-    //OUTPUTS
-    var totalCallCost = 0;
-    var totalSmsCost = 0;
+    //Outputs
+    let totalCallCost = 0;
+    let totalSmsCost = 0;
 
-    //SETTERS 
+    //Setters
     function setCallCost(callCost) {
         theCallCost = parseFloat(callCost);
     }
@@ -102,20 +104,17 @@ function SettingsBillFunc() {
     }
 }
 
-var settingsObj = SettingsBillFunc();
+/* === THE DOM CODE === */
+const settingsObj = SettingsBillFunc();
 const updateSettingsBtn = document.querySelector('.updateSettings');
 const addButtonSettings = document.querySelector('.addButton');
-//outputs
-var smsOut = document.querySelector('.smsTotalSettings');
-var callOut = document.querySelector('.callTotalSettings');
-var phoneOut = document.querySelector('.totalSettings');
 
 function updateSettingsEvent () {
     //settings 
-    var callCostSetting = document.querySelector('.callCostSetting').value;
-    var smsCostSetting = document.querySelector('.smsCostSetting').value;
-    var warningLevelSetting = document.querySelector('.warningLevelSetting').value;
-    var criticalLevelSetting = document.querySelector('.criticalLevelSetting').value;
+    const callCostSetting = document.querySelector('.callCostSetting').value;
+    const smsCostSetting = document.querySelector('.smsCostSetting').value;
+    const warningLevelSetting = document.querySelector('.warningLevelSetting').value;
+    const criticalLevelSetting = document.querySelector('.criticalLevelSetting').value;
 
     //make objects and initialise
     settingsObj.setCallCost(callCostSetting);
@@ -129,23 +128,37 @@ function updateSettingsEvent () {
 }
 
 function SettingsCalcEvent() {
-    var billTypeSettings = document.querySelector(".billItemTypeWithSettings:checked").value;
+    const billTypeSettings = document.querySelector(".billItemTypeWithSettings:checked").value;
     
-    if (billTypeSettings === 'call') {
-        settingsObj.makeCall();
-    } else if (billTypeSettings === 'sms') {
-        settingsObj.sendSms();
-    }
+    //outputs
+    const smsOut = document.querySelector('.smsTotalSettings');
+    const callOut = document.querySelector('.callTotalSettings');
+    const phoneOut = document.querySelector('.totalSettings');
 
-    smsOut.innerHTML = settingsObj.getTotalSmsCost().toFixed(2);
-    callOut.innerHTML = settingsObj.getTotalCallCost().toFixed(2);
-    phoneOut.innerHTML = settingsObj.getTotalCost().toFixed(2);
+    /*Need to fix the code below!! I need to be able to check if the update
+    settings button was clicked!!! */
 
-    //warning and critical levels
-    if (settingsObj.getClassTotal() === 'warning') {
-        phoneOut.classList.add('warning');
-    } else if (settingsObj.getClassTotal() === 'danger') {
-        phoneOut.classList.add('danger');
+    if (updateSettingsBtn.clicked === true) {
+        console.log('true!!');
+        alert('Type in the settings and do not forget to press "Update Settings"!');
+    } else {
+        console.log('false!!');
+        if (billTypeSettings === 'call') {
+            settingsObj.makeCall();
+        } else if (billTypeSettings === 'sms') {
+            settingsObj.sendSms();
+        }
+    
+        smsOut.innerHTML = settingsObj.getTotalSmsCost().toFixed(2);
+        callOut.innerHTML = settingsObj.getTotalCallCost().toFixed(2);
+        phoneOut.innerHTML = settingsObj.getTotalCost().toFixed(2);
+    
+        //warning and critical levels
+        if (settingsObj.getClassTotal() === 'warning') {
+            phoneOut.classList.add('warning');
+        } else if (settingsObj.getClassTotal() === 'danger') {
+            phoneOut.classList.add('danger');
+        }   
     }
 }
 
